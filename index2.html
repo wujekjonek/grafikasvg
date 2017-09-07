@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<h1>drag drop - joo</h1>
+
+<script>
+    var click=false; // flag to indicate when shape has been clicked
+    var clickX, clickY; // stores cursor location upon first click
+    var moveX=0, moveY=0; // keeps track of overall transformation
+    var lastMoveX=0, lastMoveY=0; // stores previous transformation (move)
+
+    function mouseDown(evt){
+        evt.preventDefault(); // Needed for Firefox to allow dragging correctly
+        click=true;
+        clickX = evt.clientX;
+        clickY = evt.clientY;
+        evt.target.setAttribute("fill","green");
+    }
+
+    function move(evt){
+        evt.preventDefault();
+        if(click){
+            moveX = lastMoveX + ( evt.clientX - clickX );
+            moveY = lastMoveY + ( evt.clientY - clickY );
+
+            evt.target.setAttribute("transform", "translate(" + moveX + "," + moveY + ")");
+        }
+    }
+
+    function endMove(evt){
+        click=false;
+        lastMoveX = moveX;
+        lastMoveY = moveY;
+        evt.target.setAttribute("fill","gray");
+    }
+</script>
+
+<svg width="800" height="600" style="border: 1px solid black; background: #E0FFFF;">
+
+
+
+    <!--<circle id="mycirc2" cx="450" cy="50" r="20" stroke="#991f00" stroke-width="4" fill="#ffad99"             onmousedown="mouseDown(evt)" onmousemove="move(evt)" onmouseup="endMove(evt)" onmouseout="endMove(evt)"></circle>-->
+
+
+    <circle cx="450" cy="100" r="20"  stroke="#336600" stroke-width="4" fill="#ccff99" onmousedown="mouseDown(evt)" ></circle>
+
+
+
+    <!--<circle id="mycirc" cx="60" cy="60" r="22"             onmousedown="mouseDown(evt)" onmousemove="move(evt)" onmouseup="endMove(evt)" onmouseout="endMove(evt)" ></circle>-->
+
+</svg>
+
+
+</body>
+</html>
